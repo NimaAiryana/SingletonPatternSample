@@ -54,9 +54,9 @@ namespace SingletonPatternSample
         public static int CreatedInstanceCounter { get; private set; }
 
 
-        private static readonly Database _database = new();
+        private static readonly Lazy<Database> _lazyDatabase = new Lazy<Database>(() => new Database());
 
-        public static Database SingletonInstance => _database; // we have ONE instance of database everytime use of this propery
+        public static Database SingletonInstance => _lazyDatabase.Value; // we have ONE instance of database everytime use of this propery
 
         public static Database NotSingletonInstance => new(); // we create NEW instance of database everytime use of this propery
     }
